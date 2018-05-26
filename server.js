@@ -62,20 +62,35 @@ function insertLocation(locationName, locationDescription){
 }
 
 function exists(col, query){
-  MongoClient.connect(uri, function (err, db){
-    if(err){
-      return console.log(err);
-    }
-      var dbo = db.db('behrendtour');
-
-      dbo.collection(col).findOne({name: query}, function(err, result) {
-        if(err) throw err;
-        db.close();
-        console.log(result) //debugging
-        return(result); // originally tried returning true or false depenfing of if result existed. Still didn't work.
-
+  // Query database for collection and query
+  database_connection(col, query)
+    // Then on response we capture the returned value
+    // If we find data in the database this value will have an id, name, descripton
+    // However if no match was found the value is null
+    .then(function(items) {
+      if (items === null){
+        console.log("Value not foudn");
+      }else{
+        console.log("Value was found for the query");
+      }
       })
-
-
-    });
+      // Catche the query error
+    .catch(function(err){
+      console.log(`Err: ${err}`);
+  })
 }
+
+function database_connection(col, query) {
+// This is kinda hairy
+// We are going to chain several functions
+  return MongoClient.connect(uri)
+  // After a connection has been makde lets access the (whatever mongos tabel is Document?)
+  .then(function(database) {
+    var collection = database.db('behrendtour').collection(col).findOne({name: query})
+    // If we found information that matched the querery return it
+    return collection
+  })
+  .then(function(items) {
+    // Return the result
+    return items
+})
