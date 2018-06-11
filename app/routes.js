@@ -29,7 +29,7 @@ module.exports = function(app, passport) {
     // ADD USER==============================
     // =====================================
     // show the signup form
-    app.get('/add-user', function(req, res) {
+    app.get('/add-user', isLoggedIn, function(req, res) {
 
         // render the page and pass in any flash data if it exists
         res.render('add-user.ejs', { message: req.flash('signupMessage') });
