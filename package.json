@@ -18,6 +18,7 @@
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
-    "mongodb": "^3.1.0-beta4"
+    "mongodb": "^3.1.0-beta4",
+    "promise": "^8.0.1"
   }
 }

@@ -94,3 +94,4 @@ function database_connection(col, query) {
     // Return the result
     return items
 })
+}
