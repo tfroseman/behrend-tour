@@ -37,7 +37,7 @@ module.exports = function(app, passport) {
 
     // process the signup form
      app.post('/signup', passport.authenticate('local-signup',{
-       successRedirect: '/view-locations', // redirect to the secure profile section.
+       successRedirect: '/add-locations', // redirect to the secure profile section.
        failureRedirect: '/add-user', // redirect back to the signup page if there is an error.
        failureFlash: true // allow flash messages.
      }));
@@ -48,7 +48,7 @@ module.exports = function(app, passport) {
     // we will want this protected so you have to be logged in to visit
     // we will use route middleware to verify this (the isLoggedIn function)
     app.get('/view-locations', isLoggedIn, function(req, res) {
-        res.render('profile.ejs', {
+        res.render('view-locations.ejs', {
             user : req.user // get the user out of session and pass to template
         });
     });
