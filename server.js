@@ -41,9 +41,7 @@ app.post('/', function (req, res){
 
   });
 
-app.listen(3000, function () {
-  console.log('[*] Behrend-Tour listening on port 3000!')
-})
+app.listen(process.env.PORT||3000)
 
 function insertLocation(locationName, locationDescription){
   MongoClient.connect(uri, function (err, db){
