@@ -20,11 +20,15 @@
   margin-bottom: 10px;
 }
 
-#location-title{
+#location-title input{
     text-align: center;
     margin: auto;
     width:25%;
+    background: #56CCF2;
+    color: white;
+
 }
+
 #gallery{
   background-color: #C4C4C4;
   height: 400px;
@@ -72,3 +76,8 @@
 .dropdown-content a:hover{background-color: #28A9FF;}
 
 .show {display:block;}
+
+.textfield-focused {
+  background: white !important;
+  color: black !important;
+}

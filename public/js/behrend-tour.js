@@ -1,3 +1,19 @@
+document.addEventListener('focusin', function(e) {
+  var elementName = e.srcElement.name;
+  if(elementName == 'locationTitle'){
+    var elementNodeList = document.getElementsByName(elementName);
+    var element = elementNodeList.item(0);
+    element.classList.add('textfield-focused');
+  }
+})
+document.addEventListener('focusout', function(e) {
+  var elementName = e.srcElement.name;
+  if(elementName == 'locationTitle'){
+    var elementNodeList = document.getElementsByName(elementName);
+    var element = elementNodeList.item(0);
+    element.classList.remove('textfield-focused');
+  }
+})
 // Drop Down Menu
 function dropDownControl(){
   document.getElementById("gallery-dropdown").classList.toggle("show");
@@ -33,4 +49,8 @@ function fileUploadAudio(){
 function fileUploadVideo(){
   const fileInput = document.querySelector('#upload-file-video');
   fileInput.click();
+}
+function locationTitleFocused(){
+  const locationTitle = document.activeElement;
+  console.log(locationTitle);
 }
