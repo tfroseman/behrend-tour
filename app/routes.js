@@ -1,4 +1,6 @@
 // app/routes.js
+
+const locationModel = require('./models/location.js');
 module.exports = function(app, passport) {
 
     // =====================================
@@ -70,8 +72,8 @@ module.exports = function(app, passport) {
 
       res.render('add-location.ejs', {
         user:req.user
-      }
-    })
+      });
+    });
 
     // =====================================
     // LOGOUT ==============================
@@ -79,6 +81,35 @@ module.exports = function(app, passport) {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
+    });
+
+
+
+    // DEBUG: routes
+    // Get a Location
+    app.get('/location/:id', function(request, response){
+      response.json({ "Status": "Empty" });
+    })
+
+    // Get all Locations
+    app.get('/location', function(request, response){
+      locationModel.find({}, function(err, locations) {
+        if (!err){
+            response.json(locations);
+        } else {
+          console.error(err);
+        }
+      });
+    });
+
+    // Update a location
+    app.put('/location/:id', function(request, response){
+      response.json();
+    });
+
+    // Add a location
+    app.post('/location', function(request, response){
+      response.json({ "Status": "Empty" });
     });
 };
 
