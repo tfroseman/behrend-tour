@@ -28,7 +28,8 @@ module.exports = function(app, passport) {
     // =====================================
     // ADD USER==============================
     // =====================================
-    // show the signup form
+    // PROTECTED
+    // Details: Adds user to user table.
     app.get('/add-user', isLoggedIn, function(req, res) {
 
         // render the page and pass in any flash data if it exists
@@ -43,10 +44,9 @@ module.exports = function(app, passport) {
      }));
 
     // =====================================
-    // VIEW LOCATIONS =====================
+    // VIEW All LOCATIONS ==================
     // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
+    // PROTECTED
     app.get('/view-locations', isLoggedIn, function(req, res) {
         res.render('view-locations.ejs', {
             user : req.user // get the user out of session and pass to template
@@ -54,19 +54,30 @@ module.exports = function(app, passport) {
     });
 
     // =====================================
+    // VIEW SPECIFIC LOCATIONS =============
+    // =====================================
+    // PROTECTED
+    app.get('/view-locations/:location', function(req, res) {
+        res.send("Location: " + req.params.location);
+    });
+
+    // =====================================
     // ADD LOCATION ========================
     // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
+    // PROTECTED
+    // Details: Allows user to create new location for anniverary tour
     app.get('/add-location', isLoggedIn, function(req, res){
       res.render('add-location.ejs', {
         user:req.user // get the user out of session and pass to template.
       })
     })
 
-    // process location form.
-    // app.post('/add-location', passport.authenticate(''))
+    // process the new location and store to db.
+     app.post('/add-location', function(req, res){
 
+     console.log(req.body.editor1);
+
+     });
     // =====================================
     // LOGOUT ==============================
     // =====================================

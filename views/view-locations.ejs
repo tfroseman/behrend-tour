@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>View Locations</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+
+    <script src="/ckeditor/ckeditor.js"></script>
+    <script src="/js/behrend-tour.js"></script>
+    <script>
+      var data = ['apple', 'orange', 'banana', 'mango']
+      table = populateTable(4, data);
+      document.getElementById('content').innerHTML = table;
+    </script>
+  </head>
+  <form action="/add-location" method="post">
+
+    <div id="admin-menu">
+      <div>
+      <a href="google.com">Account</a>
+      <div style="background-color:white; float:right; width:2px !important; "></div>
+      <a href="google.com">Add Location</a>
+      <div style="background-color:white; float:right; width:2px !important;"></div>
+      <a href="google.com">View Locations</a>
+    </div>
+    </div>
+
+    <div id="page-title">
+      <div id="location-title" style="text-align: center;">
+        <span>View Locations</span>
+      </div>
+    </div>
+
+  <div id="content">
+
+  </div>
+  </form>
+</html>
