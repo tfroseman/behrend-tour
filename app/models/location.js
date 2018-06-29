@@ -1,16 +1,17 @@
 // load the things we need.
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+
 
 // define the schema for our location model.
-var locationSchema = new Schema({
-    id            :Number,
+var locationSchema = mongoose.Schema({
+    local           :{
     name          :String,
     description   :String,
+  },
 });
 
+// methods ======================
 
-var LocationModel = mongoose.model('location', locationSchema );
 
-//exports.Location = LocationModel;
-module.exports = LocationModel;
+// create the model for locations and expose it to our app.
+module.exports = mongoose.model('Location', locationSchema);

@@ -1,6 +1,5 @@
-// app/routes.js
-
-const locationModel = require('./models/location.js');
+var mongoose = require('mongoose')
+var Location = require('./models/location')
 module.exports = function(app, passport) {
 
     // =====================================
@@ -30,8 +29,9 @@ module.exports = function(app, passport) {
     // =====================================
     // ADD USER==============================
     // =====================================
-    // show the signup form
-    app.get('/add-user', function(req, res) {
+    // PROTECTED
+    // Details: Adds user to user table.
+    app.get('/add-user', isLoggedIn, function(req, res) {
 
         // render the page and pass in any flash data if it exists
         res.render('add-user.ejs', { message: req.flash('signupMessage') });
@@ -45,36 +45,53 @@ module.exports = function(app, passport) {
      }));
 
     // =====================================
-    // VIEW LOCATIONS =====================
+    // VIEW All LOCATIONS ==================
     // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
+    // PROTECTED
     app.get('/view-locations', isLoggedIn, function(req, res) {
+        //console.log(Location.find());
         res.render('view-locations.ejs', {
             user : req.user // get the user out of session and pass to template
         });
+
+
+    });
+
+    // =====================================
+    // VIEW SPECIFIC LOCATIONS =============
+    // =====================================
+    // PROTECTED
+    app.get('/view-locations/:location', function(req, res) {
+        res.send("Location: " + req.params.location);
     });
 
     // =====================================
     // ADD LOCATION ========================
     // =====================================
-    // we will want this protected so you have to be logged in to visit
-    // we will use route middleware to verify this (the isLoggedIn function)
+    // PROTECTED
+    // Details: Allows user to create new location for anniverary tour
     app.get('/add-location', isLoggedIn, function(req, res){
       res.render('add-location.ejs', {
         user:req.user // get the user out of session and pass to template.
       })
     })
 
-    // process location form.
-    app.post('/add-location', isLoggedIn, function(req, res) {
+    // process the new location and store to db.
+     app.post('/add-location', function(req, res){
 
+     console.log(req.body.editor1);
+     var newLocation = new Location();
+     newLocation.local.name = req.body.locationTitle;
+     newLocation.local.description = req.body.editor1;
 
-      res.render('add-location.ejs', {
-        user:req.user
-      });
-    });
+     // save the location
+     newLocation.save( function(err) {
+       console.log("In save meth");
+         if (err)
+          throw err;
+     });
 
+     });
     // =====================================
     // LOGOUT ==============================
     // =====================================

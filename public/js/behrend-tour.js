@@ -14,6 +14,7 @@ document.addEventListener('focusout', function(e) {
     element.classList.remove('textfield-focused');
   }
 })
+document.getElementById("upload-file-all").addEventListener('change', setBackroundImage, true);
 // Drop Down Menu
 function dropDownControl(){
   document.getElementById("gallery-dropdown").classList.toggle("show");
@@ -50,7 +51,41 @@ function fileUploadVideo(){
   const fileInput = document.querySelector('#upload-file-video');
   fileInput.click();
 }
+function setBackroundImage(){
+  console.log("Image is being set.");
+  var file = document.querySelector('#upload-file-all').files[0];
+  var reader = new FileReader();
+  reader.onloadend = function(e){
+    document.getElementById('gallery').style.backgroundImage = "url(" + reader.result + ")";
+    if(file){
+      reader.readAsDataUrl(file);
+    }else{
+      console.log(e);
+    }
+  }
+}
 function locationTitleFocused(){
   const locationTitle = document.activeElement;
   console.log(locationTitle);
+}
+
+function populateTable(nColumns, data){
+  let arrayCopy = data.slice(0) // create copy of the data to modify for table.
+  let myTable = "<table>"
+
+  // Populate body
+ while (arrayCopy.length > 0) {
+   myTable += "<tr>";
+   for (let i = 0; i < nColumns; i++) {
+     if (arrayCopy.length == 0) {
+       myTable += "<td>" + "" + "</td>";
+     } else {
+       myTable += "<td>" + arrayCopy.shift() + "</td>";
+     }
+   }
+   myTable += "</tr>";
+ }
+
+ myTable += "</table>";
+ return myTable;
 }

@@ -26,7 +26,7 @@
     width:25%;
     background: #56CCF2;
     color: white;
-
+    margin-top: 17px;
 }
 
 #gallery{
@@ -34,6 +34,9 @@
   height: 400px;
   width: 75%;
   margin:auto;
+  background-image: url();
+  background-size: cover;
+  background-position: center;
 }
 #edit-gallery-icon{
   height:20px;
@@ -59,6 +62,11 @@
 #upload-file-image{display:none;}
 #upload-file-audio{display:none;}
 #upload-file-video{display:none;}
+
+#page-title{
+  color:white;
+  background-color: #56CCF2;
+}
 .dropdown-content{
   display:none;
   position: absolute;
