@@ -65,7 +65,13 @@ module.exports = function(app, passport) {
     })
 
     // process location form.
-    // app.post('/add-location', passport.authenticate(''))
+    app.post('/add-location', isLoggedIn, function(req, res) {
+
+
+      res.render('add-location.ejs', {
+        user:req.user
+      }
+    })
 
     // =====================================
     // LOGOUT ==============================
