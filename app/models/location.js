@@ -13,5 +13,5 @@ var locationSchema = mongoose.Schema({
 // methods ======================
 
 
-// create the model for users and expose it to our app.
+// create the model for locations and expose it to our app.
 module.exports = mongoose.model('Location', locationSchema);

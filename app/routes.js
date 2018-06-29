@@ -1,3 +1,5 @@
+var mongoose = require('mongoose')
+var Location = require('./models/location')
 // app/routes.js
 module.exports = function(app, passport) {
 
@@ -48,9 +50,12 @@ module.exports = function(app, passport) {
     // =====================================
     // PROTECTED
     app.get('/view-locations', isLoggedIn, function(req, res) {
+        //console.log(Location.find());
         res.render('view-locations.ejs', {
             user : req.user // get the user out of session and pass to template
         });
+
+
     });
 
     // =====================================
@@ -76,6 +81,16 @@ module.exports = function(app, passport) {
      app.post('/add-location', function(req, res){
 
      console.log(req.body.editor1);
+     var newLocation = new Location();
+     newLocation.local.name = req.body.locationTitle;
+     newLocation.local.description = req.body.editor1;
+
+     // save the location
+     newLocation.save( function(err) {
+       console.log("In save meth");
+         if (err)
+          throw err;
+     });
 
      });
     // =====================================
