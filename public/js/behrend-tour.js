@@ -89,4 +89,3 @@ function populateTable(nColumns, data){
  myTable += "</table>";
  return myTable;
 }
-}
