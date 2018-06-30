@@ -50,10 +50,16 @@ module.exports = function(app, passport) {
     // =====================================
     // PROTECTED
     app.get('/view-locations', isLoggedIn, function(req, res) {
-        //console.log(Location.find());
-        res.render('view-locations.ejs', {
-            user : req.user // get the user out of session and pass to template
+        var results = Location.find({}, function (err, locations){
+          if(err)
+            throw err;
+
+            res.render('view-locations.ejs', {
+                user : req.user, // get the user out of session and pass to template
+                locations : locations,
+            });
         });
+
 
 
     });
@@ -91,7 +97,7 @@ module.exports = function(app, passport) {
          if (err)
           throw err;
      });
-
+     res.redirect("/view-locations");
      });
     // =====================================
     // LOGOUT ==============================

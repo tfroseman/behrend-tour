@@ -19,11 +19,9 @@
 
     <script src="/ckeditor/ckeditor.js"></script>
     <script src="/js/behrend-tour.js"></script>
-    <script>
-      var data = ['apple', 'orange', 'banana', 'mango']
-      table = populateTable(4, data);
-      document.getElementById('content').innerHTML = table;
-    </script>
+
+
+
   </head>
   <form action="/add-location" method="post">
 
@@ -43,7 +41,18 @@
       </div>
     </div>
 
+    <script>
+      var data = ['apple', 'orange', 'banana', 'mango']
+      table = populateTable(4, data);
+      document.getElementById('content').innerHTML = table;
+    </script>
+
   <div id="content">
+     <ul>
+       <% locations.forEach(function(location){ %>
+        <%- location %>
+       <% }); %>
+     </ul>
 
   </div>
   </form>
