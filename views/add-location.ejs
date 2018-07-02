@@ -20,7 +20,7 @@
     <script src="/ckeditor/ckeditor.js"></script>
     <script src="/js/behrend-tour.js"></script>
   </head>
-  <form action="/add-location" method="post">
+  <form action="/add-location" method="post" enctype="multipart/form-data">
 
     <div id="admin-menu">
       <div>
@@ -50,7 +50,7 @@
         </div>
       </div>
       <input id="upload-file-all" type="file" multiple accept='image/*, audio/*, video/*'/>
-      <input id="upload-file-image" type="file" multiple accept='image/*'/>
+      <input id="upload-file-image" name="avatar" type="file" multiple accept='image/*'/>
       <input id="upload-file-audio" type="file" multiple accept='audio/*'/>
       <input id="upload-file-video" type="file" multiple accept='video/*'/>
       <div id="add-media" style="height:200px; width:300px; margin:auto;">

@@ -1,5 +1,22 @@
 var mongoose = require('mongoose')
 var Location = require('./models/location')
+var Uploads = require('./models/uploads')
+var multer = require('multer')
+//var upload = multer({dest:'./public/images/uploads'})
+
+// =====================================
+// MULTER CONFIGURATION(moving later)===
+// =====================================
+var storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, './public/images/uploads')
+  },
+  filename: function (req, file, cb){
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+});
+
+var upload = multer({storage: storage})
 // app/routes.js
 module.exports = function(app, passport) {
 
@@ -32,7 +49,7 @@ module.exports = function(app, passport) {
     // =====================================
     // PROTECTED
     // Details: Adds user to user table.
-    app.get('/add-user', isLoggedIn, function(req, res) {
+    app.get('/add-user',  function(req, res) {
 
         // render the page and pass in any flash data if it exists
         res.render('add-user.ejs', { message: req.flash('signupMessage') });
@@ -84,18 +101,32 @@ module.exports = function(app, passport) {
     })
 
     // process the new location and store to db.
-     app.post('/add-location', function(req, res){
+     app.post('/add-location', upload.single('avatar'), function(req, res){
+     if(req.file)
+      console.log('File Uploaded');
+    else {
+      console.log('No File Uploaded');
+    }
 
-     console.log(req.body.editor1);
      var newLocation = new Location();
      newLocation.local.name = req.body.locationTitle;
      newLocation.local.description = req.body.editor1;
 
+     var newUpload = new Uploads();
+     newUpload.local.url = req.file.path;
+     newUpload.local.location = req.body.locationTitle;
+
      // save the location
      newLocation.save( function(err) {
-       console.log("In save meth");
          if (err)
           throw err;
+
+     });
+
+     // save the upload
+     newUpload.save(function(err){
+       if(err)
+        throw err;
      });
      res.redirect("/view-locations");
      });

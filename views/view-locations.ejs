@@ -41,18 +41,38 @@
       </div>
     </div>
 
-    <script>
-      var data = ['apple', 'orange', 'banana', 'mango']
-      table = populateTable(4, data);
-      document.getElementById('content').innerHTML = table;
-    </script>
 
-  <div id="content">
-     <ul>
+
+  <div id="content" style="height:100%; width: 500px position: relative;
+left: 150px;">
+
+     <div id ="location-table" class="container">
        <% locations.forEach(function(location){ %>
-        <%- location %>
-       <% }); %>
-     </ul>
+        <div class="row">
+          <div class="col" style="margin-right: 200px;">
+            <div id="location-image" style="background-color:#C4C4C4;">
+              <img>
+          </div>
+          </div>
+          <div class="col" style="margin-right: 200px;">
+            <%=location.local.name%>
+          </div>
+
+          <div class="col" style="margin-right: 200px;">
+            <%=location.local.checkins %>
+          </div>
+
+          <div class="col" style="margin-right: 50px;">
+            <a href="/edit-location/">edit</a>
+          </div>
+
+          <div class="col">
+            <a href="/edit-location/">delete</a>
+          </div>
+        </div>
+        <hr>
+        <% }); %>
+     </div>
 
   </div>
   </form>

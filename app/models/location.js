@@ -7,6 +7,7 @@ var locationSchema = mongoose.Schema({
     local           :{
     name          :String,
     description   :String,
+    checkins      :String,
   },
 });
 
