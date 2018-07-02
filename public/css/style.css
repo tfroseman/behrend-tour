@@ -81,6 +81,7 @@
 }
 .row > .col {
   float:left;
+  font-size: 20px;
 }
 .dropdown-content{
   display:none;
