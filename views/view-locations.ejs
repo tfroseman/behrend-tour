@@ -43,8 +43,8 @@
 
 
 
-  <div id="content" style="height:100%; width: 500px position: relative;
-left: 150px;">
+  <div id="content" style = "height:100%; width: 500px; position:relative;
+left:150px;">
 
      <div id ="location-table" class="container">
        <% locations.forEach(function(location){ %>
@@ -54,19 +54,19 @@ left: 150px;">
               <img>
           </div>
           </div>
-          <div class="col" style="margin-right: 200px;">
+          <div class="col" style="margin-right: 200px; margin-top:75px;">
             <%=location.local.name%>
           </div>
 
-          <div class="col" style="margin-right: 200px;">
+          <div class="col" style="margin-right: 200px; margin-top:75px;">
             <%=location.local.checkins %>
           </div>
 
-          <div class="col" style="margin-right: 50px;">
+          <div class="col" style="margin-right: 50px; margin-top:75px;">
             <a href="/edit-location/">edit</a>
           </div>
 
-          <div class="col">
+          <div class="col" style="margin-top:75px;">
             <a href="/edit-location/">delete</a>
           </div>
         </div>
