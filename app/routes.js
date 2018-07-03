@@ -88,10 +88,10 @@ module.exports = function(app, passport) {
     app.get('/edit-location/:location', function(req, res) {
         // res.send("Location: " + req.params.location);
         console.log(req.params.location);
-        var results = Location.find({name: 'location1'}, function (err, locations){
+        var results = Location.findOne({'local.name': req.params.location}, function (err, locations){
           if(err)
             throw err;
-            console.log(locations);
+            console.log(locations); //locations is empty....callback issue?
             res.render('edit-location.ejs', {
                 user : req.user, // get the user out of session and pass to template
                 locationTitle: locations.local.name,

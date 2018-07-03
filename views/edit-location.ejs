@@ -34,7 +34,7 @@
 
     <div id="location-header">
       <div id="location-title" style="text-align: center;">
-        <input type="text" name="locationTitle" value= <%= location %> style="text-align:center; font-color:white;">
+        <input type="text" name="locationTitle" value= <%= locationTitle %> style="text-align:center; font-color:white;">
       </div>
     </div>
 
@@ -63,7 +63,7 @@
 
     <div id="location-description">
       <textarea name="editor1" id="editor1" rows="20" cols="80">
-
+          <%= locationDescription %>
       </textarea>
       <script>
           CKEDITOR.replace('editor1');
