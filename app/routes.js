@@ -1,5 +1,23 @@
 var mongoose = require('mongoose')
 var Location = require('./models/location')
+var Uploads = require('./models/uploads')
+var multer = require('multer')
+//var upload = multer({dest:'./public/images/uploads'})
+
+// =====================================
+// MULTER CONFIGURATION(moving later)===
+// =====================================
+var storage = multer.diskStorage({
+  destination: function(req, file, cb){
+    cb(null, './public/images/uploads')
+  },
+  filename: function (req, file, cb){
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+});
+
+var upload = multer({storage: storage})
+// app/routes.js
 module.exports = function(app, passport) {
 
     // =====================================
@@ -31,7 +49,7 @@ module.exports = function(app, passport) {
     // =====================================
     // PROTECTED
     // Details: Adds user to user table.
-    app.get('/add-user', isLoggedIn, function(req, res) {
+    app.get('/add-user',  function(req, res) {
 
         // render the page and pass in any flash data if it exists
         res.render('add-user.ejs', { message: req.flash('signupMessage') });
@@ -49,20 +67,37 @@ module.exports = function(app, passport) {
     // =====================================
     // PROTECTED
     app.get('/view-locations', isLoggedIn, function(req, res) {
-        //console.log(Location.find());
-        res.render('view-locations.ejs', {
-            user : req.user // get the user out of session and pass to template
+        var results = Location.find({}, function (err, locations){
+          if(err)
+            throw err;
+
+            res.render('view-locations.ejs', {
+                user : req.user, // get the user out of session and pass to template
+                locations : locations,
+            });
         });
+
 
 
     });
 
     // =====================================
-    // VIEW SPECIFIC LOCATIONS =============
+    // EDIT LOCATION =======================
     // =====================================
     // PROTECTED
-    app.get('/view-locations/:location', function(req, res) {
-        res.send("Location: " + req.params.location);
+    app.get('/edit-location/:location', function(req, res) {
+        // res.send("Location: " + req.params.location);
+        console.log(req.params.location);
+        var results = Location.find({name: 'location1'}, function (err, locations){
+          if(err)
+            throw err;
+            console.log(locations);
+            res.render('edit-location.ejs', {
+                user : req.user, // get the user out of session and pass to template
+                locationTitle: locations.local.name,
+                locationDescription: locations.local.description,
+            });
+        });
     });
 
     // =====================================
@@ -77,20 +112,34 @@ module.exports = function(app, passport) {
     })
 
     // process the new location and store to db.
-     app.post('/add-location', function(req, res){
+     app.post('/add-location', upload.single('avatar'), function(req, res){
+     if(req.file)
+      console.log('File Uploaded');
+    else {
+      console.log('No File Uploaded');
+    }
 
-     console.log(req.body.editor1);
      var newLocation = new Location();
      newLocation.local.name = req.body.locationTitle;
      newLocation.local.description = req.body.editor1;
 
+     var newUpload = new Uploads();
+     newUpload.local.url = req.file.path;
+     newUpload.local.location = req.body.locationTitle;
+
      // save the location
      newLocation.save( function(err) {
-       console.log("In save meth");
          if (err)
           throw err;
+
      });
 
+     // save the upload
+     newUpload.save(function(err){
+       if(err)
+        throw err;
+     });
+     res.redirect("/view-locations");
      });
     // =====================================
     // LOGOUT ==============================
@@ -98,35 +147,6 @@ module.exports = function(app, passport) {
     app.get('/logout', function(req, res) {
         req.logout();
         res.redirect('/');
-    });
-
-
-
-    // DEBUG: routes
-    // Get a Location
-    app.get('/location/:id', function(request, response){
-      response.json({ "Status": "Empty" });
-    })
-
-    // Get all Locations
-    app.get('/location', function(request, response){
-      locationModel.find({}, function(err, locations) {
-        if (!err){
-            response.json(locations);
-        } else {
-          console.error(err);
-        }
-      });
-    });
-
-    // Update a location
-    app.put('/location/:id', function(request, response){
-      response.json();
-    });
-
-    // Add a location
-    app.post('/location', function(request, response){
-      response.json({ "Status": "Empty" });
     });
 };
 
