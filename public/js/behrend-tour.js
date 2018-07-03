@@ -10,11 +10,21 @@ document.addEventListener('focusout', function(e) {
   var elementName = e.srcElement.name;
   if(elementName == 'locationTitle'){
     var elementNodeList = document.getElementsByName(elementName);
-    var element = elementNodeList.item(0);
-    element.classList.remove('textfield-focused');
+     element.classList.remove('textfield-focused');
   }
 })
-document.getElementById("upload-file-all").addEventListener('change', setBackroundImage, true);
+
+// Add listeners to getElements
+if(document.addEventListener){
+  document.getElementById("upload-file-image").addEventListener('change', function(e){
+    uploadImages(e);
+  });
+}
+else{
+  document.getElementById("upload-file-image").attachEvent("onchange", function(e){
+    uploadImages(e);
+  })
+}
 // Drop Down Menu
 function dropDownControl(){
   document.getElementById("gallery-dropdown").classList.toggle("show");
@@ -51,18 +61,9 @@ function fileUploadVideo(){
   const fileInput = document.querySelector('#upload-file-video');
   fileInput.click();
 }
-function setBackroundImage(){
-  console.log("Image is being set.");
-  var file = document.querySelector('#upload-file-all').files[0];
-  var reader = new FileReader();
-  reader.onloadend = function(e){
-    document.getElementById('gallery').style.backgroundImage = "url(" + reader.result + ")";
-    if(file){
-      reader.readAsDataUrl(file);
-    }else{
-      console.log(e);
-    }
-  }
+
+function uploadImages(e){
+
 }
 function locationTitleFocused(){
   const locationTitle = document.activeElement;
@@ -88,4 +89,14 @@ function populateTable(nColumns, data){
 
  myTable += "</table>";
  return myTable;
+}
+
+function loadFile(event){
+  var output = document.getElementById('preview');
+  var editIcon = document.querySelector('#media');
+  // output.style.display = "";
+  // editIcon.style.display="none";
+  output.classList.toggle('hide');
+  editIcon.classList.toggle('hide');
+  output.src = URL.createObjectURL(event.target.files[0]);
 }

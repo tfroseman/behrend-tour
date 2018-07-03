@@ -27,6 +27,8 @@
     background: #56CCF2;
     color: white;
     margin-top: 17px;
+    -moz-border-style: solid;
+
 }
 
 #gallery{
@@ -34,14 +36,18 @@
   height: 400px;
   width: 75%;
   margin:auto;
-  background-image: url();
-  background-size: cover;
-  background-position: center;
+}
+
+#preview{
+  height:100%;
+  width:100%;
 }
 #edit-gallery-icon{
   height:20px;
   width:20px;
-  float:right;
+  position: absolute;
+  left: 1240px;
+  top: 100px;
 }
 #edit-gallery-icon > img:hover {
   height:120%;
@@ -105,4 +111,8 @@
 .textfield-focused {
   background: white !important;
   color: black !important;
+}
+
+.hide{
+  display:none;
 }
