@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var locationSchema = mongoose.Schema({
     local           :{
     name          :String,
+    imageURL      :String,
     description   :String,
     checkins      :String,
   },

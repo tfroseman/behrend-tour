@@ -15,16 +15,16 @@ document.addEventListener('focusout', function(e) {
 })
 
 // Add listeners to getElements
-if(document.addEventListener){
-  document.getElementById("upload-file-image").addEventListener('change', function(e){
-    uploadImages(e);
-  });
-}
-else{
-  document.getElementById("upload-file-image").attachEvent("onchange", function(e){
-    uploadImages(e);
-  })
-}
+// if(document.addEventListener){
+//   document.getElementById("upload-file-image").addEventListener('change', function(e){
+//     uploadImages(e);
+//   });
+// }
+// else{
+//   document.getElementById("upload-file-image").attachEvent("onchange", function(e){
+//     uploadImages(e);
+//   })
+// }
 // Drop Down Menu
 function dropDownControl(){
   document.getElementById("gallery-dropdown").classList.toggle("show");
