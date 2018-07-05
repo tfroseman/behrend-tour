@@ -4,6 +4,11 @@
 /* ================ */
 /* =====DESKTOPS=== */
 /* ================ */
+#content{
+  height:100%;
+  width:500px;
+  margin-left:150px;
+}
 #admin-menu{
   background-color:#2F80ED;
   height:30px;
