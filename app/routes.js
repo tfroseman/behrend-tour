@@ -113,12 +113,11 @@ module.exports = function(app, passport) {
     });
 
     app.post('/edit-location', upload.single('avatar'), function(req, res){
-      Location.findOneAndUpdate({'local.name' : req.params.location}, {'local.name' : req.body.locationTitle, 'local.description' : req.body.editor1},
-      function(err){
-        if(err)
-          throw err;
-        res.redirect("/view-locations");
-      });
+      Location.findOneAndUpdate({'local.name' : req.body.locationTitle}, {'local.name' : req.body.locationTitle, 'local.description' : req.body.editor1},
+       function(err, location_update){
+        console.log(location_update);
+        res.send(location_update);
+      })
     });
 
     // =====================================
@@ -133,9 +132,10 @@ module.exports = function(app, passport) {
     })
 
     // process the new location and store to db.
-     app.post('/add-location', upload.single('avatar'), function(req, res){
-     if(req.file)
-      console.log('File Uploaded');
+    
+    app.post('/add-location', upload.single('avatar'), function(req, res){
+        if(req.file)
+            console.log('File Uploaded');
     else {
       console.log('No File Uploaded');
     }
