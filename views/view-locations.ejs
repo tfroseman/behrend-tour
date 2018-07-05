@@ -43,7 +43,7 @@
 
 
 
-  <div id="content" style="height:100%; width:500px; margin-left:150px;">
+  <div id="content" >
 
      <div id ="location-table" class="container">
        <% locations.forEach(function(location){ %>
@@ -62,7 +62,7 @@
           </div>
 
           <div class="col" style="margin-right: 50px; margin-top:75px;">
-            <a href="/edit-location/<%=location.local.name%>">edit</a>
+            <a href="/edit-location/<%=location._id%>">edit</a>
           </div>
 
           <div class="col" style="margin-top:75px;">
