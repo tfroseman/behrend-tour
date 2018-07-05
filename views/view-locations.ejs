@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <title>View Locations</title>
 
     <!-- Latest compiled and minified CSS -->
@@ -23,7 +23,7 @@
 
 
   </head>
-  <form action="/add-location" method="post">
+
 
     <div id="admin-menu">
       <div>
@@ -50,7 +50,7 @@
         <div class="row">
           <div class="col" style="margin-right: 200px;">
             <div id="location-image" style="background-color:#C4C4C4;">
-              <img>
+              <img src="<%=location.local.imageURL%>" style="height:100%; width:100%">
           </div>
           </div>
           <div class="col" style="margin-right: 200px; margin-top:75px;">
@@ -66,7 +66,7 @@
           </div>
 
           <div class="col" style="margin-top:75px;">
-            <a href="/edit-location/">delete</a>
+            <a href="/delete/<%=location.local.name%>">delete</a>
           </div>
         </div>
         <hr>
@@ -74,5 +74,5 @@
      </div>
 
   </div>
-  </form>
+
 </html>
