@@ -19,7 +19,7 @@ var multer = require('multer');
 var loki = require('lokijs');
 
 // configuration ===============================================================
-mongoose.connect(configDB.url); // connect to our database
+//mongoose.connect(configDB.url); // connect to our database
 
  require('./config/passport')(passport); // pass passport for configuration
  //require('./config/multer')(multer); // pass multer for configuration.
